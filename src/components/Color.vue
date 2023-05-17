@@ -1,10 +1,10 @@
 <template v-if="color">
-  <div  class="w-100">
-              <label :for="newID" class="font-1_5rem w-100 text-info text-center color-label">
-                      {{ getHexColor(paramColor.param_value) }}
-              </label>
-              <input type="color" :id="newID" class="w-100" :value="getHexColor(paramColor.param_value)"
-                  @input="onChange($event.target.value)" />
+  <div class="w-100">
+    <label :for="newID" class="font-1_5rem w-100 text-info text-center color-label">
+      {{ getHexColor(paramColor.param_value) }}
+    </label>
+    <input type="color" :id="newID" class="w-100" :value="getHexColor(paramColor.param_value)"
+      @input="onChange($event.target.value)" />
   </div>
 </template>
 
@@ -22,25 +22,6 @@ export default {
         type: Object,
       },
 
-      // color: {
-      //     type: String,
-      //     default: '#333333',
-      // },
-
-      // param_name: {
-      //     type: String,
-      //     default: '',
-      // },
-
-      // param_desc: {
-      //     type: String,
-      //     default: '',
-      // },
-
-      // param_fullname: {
-      //     type: String,
-      //     default: '',
-      // },
   },
 
   emits: ['onChange'],
@@ -48,7 +29,6 @@ export default {
   data() {
       return {
           newID: '',
-          // param_value: ''
       }
   },
 
@@ -57,7 +37,6 @@ export default {
   },
 
   mounted(){
-    // this.param_value = this.paramColor.param_value
   },
 
   methods: {

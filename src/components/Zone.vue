@@ -49,6 +49,7 @@ export default {
       type: String,
       default: 'Zone'
     },
+
     cardTabs: {
       type: String,
       default: 'Please select a color and zone address'
