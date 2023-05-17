@@ -2,9 +2,9 @@
   <div class="px-2 w-100">
     <!-- <div class=""> -->
     <div class="flex-space font-1_2rem">
-      <div class="text-info w-25">{{ paramRange.param_min }}</div>
+      <div class="text-info w-25">{{ paramRange.min }}</div>
       <div class="text-info">{{ getValue(paramRange.param_value) }}</div>
-      <div class="text-info w-25 align-right">{{ paramRange.param_max }}</div>
+      <div class="text-info w-25 align-right">{{ paramRange.max }}</div>
     </div>
     <input type="range" class="form-range" step="1" :min="paramRange.min" :max="paramRange.max"
       :value="getValue(paramRange.param_value)" @change="onChange($event.target.value)">
@@ -25,36 +25,15 @@ export default {
         type: Object
       },
 
-        rangeMin: {
-            type: Number,
-            defaut: 0
-        },
-
-        rangeMax: {
-            type: Number,
-            defaut: 0
-        },
-
-        rangeValue: {
-            type: Number,
-            defaut: 0
-        },
-
-        rangeCaption: {
-            type: String,
-            defaut: 'Caption'
-        },
-
-        param_fullname: {
-            type: String,
-            defaut: ''
-        },
-
     },
 
     data() {
         return {
         }
+    },
+
+    mounted(){
+      console.log(this.paramRange)
     },
 
     methods: {
@@ -87,6 +66,7 @@ export default {
 
 .font-1_2rem{
     font-size: 1.2rem;
+    color: antiquewhite;
 }
 .align-right {
     text-align: right;
