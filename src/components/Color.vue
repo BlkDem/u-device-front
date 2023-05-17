@@ -1,0 +1,106 @@
+<template v-if="color">
+  <div  class="w-100">
+              <label :for="newID" class="font-1_5rem w-100 text-info text-center color-label">
+                      {{ getHexColor(paramColor.param_value) }}
+              </label>
+              <input type="color" :id="newID" class="w-100" :value="getHexColor(paramColor.param_value)"
+                  @input="onChange($event.target.value)" />
+  </div>
+</template>
+
+<script>
+
+import MakeID from '../components/helpers/makeid'
+
+export default {
+
+  emits: ['onChange'],
+
+  props: {
+
+      paramColor: {
+        type: Object,
+      },
+
+      // color: {
+      //     type: String,
+      //     default: '#333333',
+      // },
+
+      // param_name: {
+      //     type: String,
+      //     default: '',
+      // },
+
+      // param_desc: {
+      //     type: String,
+      //     default: '',
+      // },
+
+      // param_fullname: {
+      //     type: String,
+      //     default: '',
+      // },
+  },
+
+  emits: ['onChange'],
+
+  data() {
+      return {
+          newID: '',
+          // param_value: ''
+      }
+  },
+
+  created() {
+      this.newID = MakeID.makeId(8, 'mqtt_color_')
+  },
+
+  mounted(){
+    // this.param_value = this.paramColor.param_value
+  },
+
+  methods: {
+
+      onChange(e) {
+          this.$emit('onChange', e, this.paramColor.param_fullname)
+      },
+
+      getStyle() {
+          if (this.color == null) return
+          return 'color: ' + this.color + ';'
+      },
+
+      getHexColor(value) {
+          const a = Number.parseInt(value)
+          if (isNaN(a)) return value
+              // return HEX color like #AABBCC
+              return '#' + a.toString(16).toUpperCase();
+      }
+  }
+
+}
+</script>
+
+<style scoped>
+.color-label{
+  position: relative;
+  display: block;
+  text-shadow: 1px 1px 1px #333;
+  margin-top: 16px;
+  color: whitesmoke;
+  /* margin-bottom: -30px; */
+}
+
+input[type=color] {
+  height: 36px;
+  padding: 0.1rem 0.2rem;
+  /* width: 100%; */
+  min-width: 250px;
+}
+
+.font-1_5rem {
+  font-size: 1.0rem;
+}
+
+</style>
