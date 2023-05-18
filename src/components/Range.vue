@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-2 w-100">
+  <div class="px-2 w-100">
     <div class="flex-space font-1_2rem">
       <div class="text-info w-25">{{ paramRange.min }}</div>
       <div class="has-text-info">{{ getValue(paramRange.param_value) }}</div>
@@ -53,15 +53,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
-// .form-range {
-//   width: 100%;
-// }
-.flex-space {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
 
 .font-1_2rem{
     font-size: 1.2rem;

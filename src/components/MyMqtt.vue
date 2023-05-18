@@ -14,6 +14,10 @@ export default {
 
     props: {
 
+      topicSubscribe: {
+        type: Object,
+      },
+
       deviceID: {
         type: String,
         default: '/84:F3:EB:B7:3E:98/',
@@ -26,24 +30,6 @@ export default {
 
     data() {
         return {
-
-          // deviceID: '/84:F3:EB:B7:3E:98/',
-
-          topics: {
-            LWT:     'LWT',
-            cmd:     'cmd',
-            systime: 'systime',
-            uptime:  'uptime',
-            ip:      'ip',
-            zone1:   'zone1',
-            zone2:   'zone2',
-            zone3:   'zone3',
-            zone4:   'zone4',
-            count1:  'count1',
-            count2:  'count2',
-            count3:  'count3',
-            count4:  'count4',
-          },
 
             connection: {
                 host: 'ice9.umolab.ru',
@@ -86,6 +72,8 @@ export default {
     },
 
     mounted() {
+        console.log(Array.from(this.topicSubscribe));
+
         this.createConnection();
     },
 
@@ -99,8 +87,15 @@ export default {
 
         processParams() {
 
-          for (let item in this.topics) {
-            this.doSubscribe(this.deviceID + item)
+          const paramArray = Array.from(this.topicSubscribe);
+          if (paramArray.length <= 0) {
+            console.log('Nothing to process');
+            return;
+          }
+
+          for (let item in paramArray) {
+            // console.log(this.deviceID + paramArray[item])
+            this.doSubscribe(this.deviceID + paramArray[item])
           }
 
         },

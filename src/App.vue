@@ -1,7 +1,7 @@
 <template>
-  <section class="container">
+  <section class="container is-max-widescreen mt-4">
     <header>
-      <nav class="navbar is-dark is-rounded" role="navigation" aria-label="main navigation">
+      <nav class="navbar is-dark br-8" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
           <a class="navbar-item" href="https://umolab.ru">
             <img src="https://iotman.blkdem.ru/apple-icon-60x60.png" height="60">
@@ -50,10 +50,7 @@
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="buttons">
-                <!-- <a class="button is-primary">
-                  <strong>Sign up</strong>
-                </a> -->
-                <a class="button is-light" href="/config">
+                <a class="button is-success" href="/config">
                   Config
                 </a>
               </div>
@@ -64,13 +61,16 @@
     </header>
   </section>
 
-  <section class="container">
+  <section class="container is-max-widescreen">
     <h1>
+      <button class="button is-rounded w-40px mr-2"
+        :class="{'is-loading is-danger': !isConnected, 'is-success': isConnected}"
+      ></button>
       Umolab Devices Controller - Standalone #1
     </h1>
   </section>
 
-  <section class="container py-4">
+  <section class="container py-4 is-max-widescreen">
     <div class="columns is-desktop">
       <div class="column">
       <Zone
@@ -111,7 +111,7 @@
     </div>
   </section>
 
-  <section class="container">
+  <section class="container is-max-widescreen">
     <div class="columns is-desktop">
     <div class="column">
 
@@ -131,16 +131,22 @@
     </div>
   </section>
 
-  <section class="container">
-    <footer>
-
-      <MyMqtt ref="mqttRef"
-        :deviceID="deviceID"
-        @on-connect="mqttConnected"
-        @on-message="onMessage"
-      />
-    </footer>
+  <section class="container is-max-widescreen my-4">
+    <hr class="mx-4"/>
+    <div class="content has-text-centered">
+      <p class="has-text-white">
+        <a href="https://umolab.ru"><strong>Umolab Devices</strong></a> Controller. &copy; 2023
+      </p>
+    </div>
   </section>
+
+  <MyMqtt ref="mqttRef"
+    :deviceID="deviceID"
+    :topic-subscribe="topics"
+    @on-connect="mqttConnected"
+    @on-message="onMessage"
+  />
+
 </template>
 
 <script>
@@ -164,41 +170,45 @@ export default {
   data() {
     return {
 
+      isConnected: false,
+
+      topics: '',
+
       presets: {
 
         preset1: {
-          color1: {
+          zone1: {
             param_fullname: deviceID + 'preset1/zone1',
             param_value: 0,
           },
-          color2: {
+          zone2: {
             param_fullname: deviceID + 'preset1/zone2',
             param_value: 0,
           },
-          color3: {
+          zone3: {
             param_fullname: deviceID + 'preset1/zone3',
             param_value: 0,
           },
-          color4: {
+          zone4: {
             param_fullname: deviceID + 'preset1/zone4',
             param_value: 0,
           },
         },
 
         preset2: {
-          color1: {
+          zone1: {
             param_fullname: deviceID + 'preset2/zone1',
             param_value: 0,
           },
-          color2: {
+          zone2: {
             param_fullname: deviceID + 'preset2/zone2',
             param_value: 0,
           },
-          color3: {
+          zone3: {
             param_fullname: deviceID + 'preset2/zone3',
             param_value: 0,
           },
-          color4: {
+          zone4: {
             param_fullname: deviceID + 'preset2/zone4',
             param_value: 0,
           },
@@ -300,6 +310,35 @@ export default {
     }
   },
 
+  created() {
+
+    this.topics = new Set([
+      'LWT',
+      'cmd',
+      'systime',
+      'uptime',
+      'ip',
+      'zone1',
+      'zone2',
+      'zone3',
+      'zone4',
+      'count1',
+      'count2',
+      'count3',
+      'count4',
+      'preset1/zone1',
+      'preset1/zone2',
+      'preset1/zone3',
+      'preset1/zone4',
+      'preset2/zone1',
+      'preset2/zone2',
+      'preset2/zone3',
+      'preset2/zone4'
+    ]
+  )
+
+  },
+
   mounted() {
     this.collapseEventRegister();
   },
@@ -311,42 +350,42 @@ export default {
 
       let param_name = topic.split('/');
       if (param_name.length < 2) {
-        console.log('wrong param')
+        console.log('wrong param', topic, message);
+        return;
       }
-      console.log(param_name[2], this.zones[param_name[2]])
 
-      this.zones[param_name[2]].param.param_value = message.toString()
+      if ((param_name[2] === 'preset1') || (param_name[2] === 'preset2')) {
+        // console.log('preset', param_name[2] + '/' + param_name[3])
+        this.presets[param_name[2]][param_name[3]].param_value = message.toString()
+      } else {
+        // console.log('param: ', param_name[2], this.zones[param_name[2]])
+        this.zones[param_name[2]].param.param_value = message.toString()
 
+      }
 
-      // console.log(topic, message);
-            // for (let item in this.dashEntities.params) {
-            //     if (this.dashEntities.params[item].param_fullname === topic) {
-            //         this.dashEntities.params[item].param_value = message;
-            //     }
-            // }
     },
 
-    mqttConnected() {
-            // console.log('mqtt connected')
-
+    mqttConnected(value) {
+      // console.log('mqtt connected', value)
+      this.isConnected = value
     },
 
 
 
     onButtonClick(value, param_fullname, cmd) {
             this.$refs.mqttRef.doPublish(param_fullname, cmd);
-        },
+    },
 
-        onRangeChange(value, param_fullname) {
+    onRangeChange(value, param_fullname) {
             this.$refs.mqttRef.doPublish(param_fullname, value);
-        },
+    },
 
-        onSwitchChange(value, param_fullname) {
+    onSwitchChange(value, param_fullname) {
             // console.log(value, param_fullname)
             this.$refs.mqttRef.doPublish(param_fullname, value);
-        },
+    },
 
-        onColorChange(value, param_fullname) {
+    onColorChange(value, param_fullname) {
             console.log('on color change: ', value, param_fullname)
             if (value === null) return;
             let a = '';
@@ -355,16 +394,16 @@ export default {
             }
             const newValue = parseInt(a, 16);
             this.$refs.mqttRef.doPublish(param_fullname, newValue.toString());
-        },
+    },
 
 
-        setRangeValue(value) {
+    setRangeValue(value) {
             if (value == null) return 0;
 
             const a = Number.parseInt(value);
             if (isNaN(a)) return 0;
             return a;
-        },
+    },
 
 
     collapseEventRegister() {
@@ -399,9 +438,9 @@ export default {
 
 @import './sass/App.scss';
 
-body {
+body, html {
   background-color: black;
-  padding: 16px 16px;
+  // padding: 16px 16px;
 }
 
 h1 {
@@ -412,9 +451,33 @@ h1 {
   color: $white-bis;
 }
 
+.w-40px {
+  width: 40px;
+}
+
+.w-40 {
+  width: 40%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
 .w-100 {
   width: 100%;
 }
+
+.br-8 {
+  border-radius: 8px;
+}
+
+.flex-space {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+
 
 
 </style>

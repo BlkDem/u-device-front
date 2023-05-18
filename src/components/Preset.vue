@@ -9,23 +9,27 @@
       </p>
       <div class="panel-block">
         <ColorSelect
-          :paramColor="colors.color1"
-          @onColorChange="onColorChange"
+          :paramColor="colors.zone1"
+          @onChange="onColorChange"
         />
         <ColorSelect
-          :paramColor="colors.color2"
-          @onColorChange="onColorChange"
+          :paramColor="colors.zone2"
+          @onChange="onColorChange"
         />
         <ColorSelect
-          :paramColor="colors.color3"
-          @onColorChange="onColorChange"
+          :paramColor="colors.zone3"
+          @onChange="onColorChange"
         />
         <ColorSelect
-          :paramColor="colors.color4"
-          @onColorChange="onColorChange"
+          :paramColor="colors.zone4"
+          @onChange="onColorChange"
         />
       </div>
     </article>
+    <div class="flex-space">
+      <button class="button is-info w-40 px-2">Apply</button>
+      <button class="button is-success w-40 px-2">Save from current</button>
+    </div>
 </template>
 
 <script>
@@ -52,27 +56,17 @@ export default {
     },
 
     colors: {
-      color1: {
-        type: Object
-      },
-
-      color2: {
-        type: Object
-      },
-
-      color3: {
-        type: Object
-      },
-
-      color4: {
-        type: Object
-      }
+      type: Object,
     }
+
+  },
+
+  mounted(){
+    // console.log(this.colors)
   },
 
   methods: {
     onColorChange(e, value) {
-      console.log('from preset', e, value)
       this.$emit('onColorChange', e, value)
     },
 

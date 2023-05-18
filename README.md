@@ -33,3 +33,9 @@ npm run build
 ```sh
 npm run lint
 ```
+
+### Bulma SCSS + SASS support [Bulma](https://bulma.io)
+```sh
+npm i bulma
+npm i --save-dev sass
+```
