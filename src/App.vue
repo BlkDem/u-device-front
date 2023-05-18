@@ -118,14 +118,20 @@
     <Preset
       :cardCaption="'Preset 1'"
       :colors="presets.preset1"
+      :presetNum="'preset1'"
       @onColorChange="onColorChange"
+      @applyFromPreset="applyFromPreset"
+      @presetFromCurrent="presetFromCurrent"
     />
     </div>
     <div class="column">
     <Preset
       :cardCaption="'Preset 2'"
       :colors="presets.preset2"
+      :presetNum="'preset2'"
       @onColorChange="onColorChange"
+      @applyFromPreset="applyFromPreset"
+      @presetFromCurrent="presetFromCurrent"
     />
     </div>
     </div>
@@ -225,6 +231,34 @@ export default {
           }
         },
 
+        systime: {
+          param: {
+            param_fullname: deviceID + 'systime',
+            param_value: '',
+          }
+        },
+
+        uptime: {
+          param: {
+            param_fullname: deviceID + 'uptime',
+            param_value: '',
+          }
+        },
+
+        ssid: {
+          param: {
+            param_fullname: deviceID + 'ssid',
+            param_value: '',
+          }
+        },
+
+        ip: {
+          param: {
+            param_fullname: deviceID + 'ip',
+            param_value: '',
+          }
+        },
+
         count1: {
           caption: 'Count 1',
 
@@ -318,6 +352,7 @@ export default {
       'systime',
       'uptime',
       'ip',
+      'ssid',
       'zone1',
       'zone2',
       'zone3',
@@ -345,6 +380,20 @@ export default {
 
   methods: {
 
+    presetFromCurrent(presetNum) {
+      this.$refs.mqttRef.doPublish(deviceID + presetNum + '/zone1', this.zones.zone1.param.param_value);
+      this.$refs.mqttRef.doPublish(deviceID + presetNum + '/zone2', this.zones.zone2.param.param_value);
+      this.$refs.mqttRef.doPublish(deviceID + presetNum + '/zone3', this.zones.zone3.param.param_value);
+      this.$refs.mqttRef.doPublish(deviceID + presetNum + '/zone4', this.zones.zone4.param.param_value);
+    },
+
+    applyFromPreset(presetNum) {
+      // console.log('applyFromPreset', this.presets[presetNum]);
+      this.$refs.mqttRef.doPublish(deviceID + 'zone1', this.presets[presetNum].zone1.param_value);
+      this.$refs.mqttRef.doPublish(deviceID + 'zone2', this.presets[presetNum].zone2.param_value);
+      this.$refs.mqttRef.doPublish(deviceID + 'zone3', this.presets[presetNum].zone3.param_value);
+      this.$refs.mqttRef.doPublish(deviceID + 'zone4', this.presets[presetNum].zone4.param_value);
+    },
 
     onMessage(topic, message) {
 

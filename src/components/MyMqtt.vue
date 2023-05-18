@@ -176,6 +176,7 @@ export default {
 
         // publish
         doPublish(topic, payload) {
+          console.log(topic, payload)
             const {
                 // topic,
                 qos,

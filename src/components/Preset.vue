@@ -27,8 +27,14 @@
       </div>
     </article>
     <div class="flex-space">
-      <button class="button is-info w-40 px-2">Apply</button>
-      <button class="button is-success w-40 px-2">Save from current</button>
+      <button class="button is-info w-40 px-2"
+        @click="applyFromPreset"
+      >
+        Apply this set
+      </button>
+      <button class="button is-success w-40 px-2"
+        @click="presetFromCurrent"
+      >Save current</button>
     </div>
 </template>
 
@@ -37,13 +43,17 @@ import ColorSelect from './Color.vue';
 
 export default {
 
-  emits: ['onColorChange'],
+  emits: ['onColorChange', 'applyFromPreset', 'presetFromCurrent'],
 
   components: {
     ColorSelect
   },
 
   props: {
+
+    presetNum: {
+      type: String
+    },
 
     cardCaption: {
       type: String,
@@ -57,7 +67,7 @@ export default {
 
     colors: {
       type: Object,
-    }
+    },
 
   },
 
@@ -69,6 +79,14 @@ export default {
     onColorChange(e, value) {
       this.$emit('onColorChange', e, value)
     },
+
+    presetFromCurrent() {
+      this.$emit('presetFromCurrent', this.presetNum)
+    },
+
+    applyFromPreset() {
+      this.$emit('applyFromPreset', this.presetNum)
+    }
 
   }
 }
