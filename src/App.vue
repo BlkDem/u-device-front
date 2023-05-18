@@ -66,7 +66,7 @@
       <button class="button is-rounded w-40px mr-2"
         :class="{'is-loading is-danger': !isConnected, 'is-success': isConnected}"
       ></button>
-      Umolab Devices Controller - Standalone #1
+      UDC - Standalone #1 - {{ deviceAddress }}
     </h1>
   </section>
 
@@ -162,7 +162,7 @@ import Color from './components/Color.vue';
 import Range from './components/Range.vue';
 import Preset from './components/Preset.vue';
 
-const deviceID = '/84:F3:EB:B7:3E:98/';
+var deviceID = '/84:F3:EB:B7:3E:98/';
 
 export default {
   components: {
@@ -177,6 +177,8 @@ export default {
     return {
 
       isConnected: false,
+
+      deviceAddress: deviceID,
 
       topics: '',
 
@@ -369,8 +371,10 @@ export default {
       'preset2/zone2',
       'preset2/zone3',
       'preset2/zone4'
-    ]
-  )
+      ]
+    )
+
+    this.getConfigJson();
 
   },
 
@@ -379,6 +383,16 @@ export default {
   },
 
   methods: {
+
+    async getConfigJson() {
+
+      let response = await fetch('/json');
+
+      let json = await response.json();
+      deviceID = (json['WiFi']['STA MAC'])?'/' + json['WiFi']['STA MAC'] + '/':'/84:F3:EB:B7:3E:98/'
+      console.log('mac: ', json['WiFi']['STA MAC'], json)
+},
+
 
     presetFromCurrent(presetNum) {
       this.$refs.mqttRef.doPublish(deviceID + presetNum + '/zone1', this.zones.zone1.param.param_value);
