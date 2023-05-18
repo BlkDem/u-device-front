@@ -3,7 +3,7 @@
     <header>
       <nav class="navbar is-dark is-rounded" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
-          <a class="navbar-item" href="https://bulma.io">
+          <a class="navbar-item" href="https://umolab.ru">
             <img src="https://iotman.blkdem.ru/apple-icon-60x60.png" height="60">
           </a>
 
