@@ -8,13 +8,13 @@
         {{ cardTabs }}
       </p>
       <div class="panel-block">
-        <Color
+        <ColorSelect
           :paramColor="paramColor"
           @onChange="onChange"
         />
       </div>
     </article>
-    <Range
+    <RangeSelect
       :paramRange="paramRange"
       @onChange="onRangeChange"
     />
@@ -22,16 +22,16 @@
 
 <script>
 
-import Color from './Color.vue';
-import Range from './Range.vue';
+import ColorSelect from './ColorSelect.vue';
+import RangeSelect from './RangeSelect.vue';
 
 export default {
 
   emits: ['onColorChange', 'onRangeChange'],
 
   components: {
-    Color,
-    Range,
+    ColorSelect,
+    RangeSelect,
   },
 
   props: {

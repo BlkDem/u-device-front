@@ -10,7 +10,7 @@
 
 <script>
 
-import MakeID from '../components/helpers/makeid'
+import MakeID from '../components/helpers/makeid';
 
 export default {
 

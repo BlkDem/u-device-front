@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import ColorSelect from './Color.vue';
+import ColorSelect from './ColorSelect.vue';
 
 export default {
 

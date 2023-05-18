@@ -1,6 +1,10 @@
 # u-device-front
 
-This template should help get you started developing with Vue 3 in Vite.
+Umolab Devices "Standalone" series controller web-interface.
+
+# platform
+
+ESP 82xx
 
 ## Recommended IDE Setup
 

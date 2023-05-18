@@ -1,10 +1,6 @@
 
 <script>
-// import * as mqtt from "mqtt/dist/mqtt";
-// import * as mqtt from 'mqtt';
 import MakeID from './helpers/makeid';
-// import APIConstants from '../api/rest_api';
-// import ParsingErrors from '../helpers/ParsingErrors';
 
 export default {
 

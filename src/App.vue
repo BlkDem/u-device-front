@@ -24,7 +24,7 @@
               Documentation
             </a>
 
-            <div class="navbar-item has-dropdown is-hoverable">
+            <!-- <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link">
                 More
               </a>
@@ -44,7 +44,7 @@
                   Report an issue
                 </a>
               </div>
-            </div>
+            </div> -->
           </div>
 
           <div class="navbar-end">
@@ -73,7 +73,7 @@
   <section class="container py-4 is-max-widescreen">
     <div class="columns is-desktop">
       <div class="column">
-      <Zone
+      <ZonePanel
         :cardCaption = "zones.zone1.caption"
         :paramColor = "zones.zone1.param"
         :paramRange = "zones.count1.param"
@@ -82,7 +82,7 @@
       />
       </div>
       <div class="column">
-      <Zone
+      <ZonePanel
         :cardCaption = "zones.zone2.caption"
         :paramColor = "zones.zone2.param"
         :paramRange = "zones.count2.param"
@@ -91,7 +91,7 @@
       />
       </div>
       <div class="column">
-      <Zone
+      <ZonePanel
         :cardCaption = "zones.zone3.caption"
         :paramColor = "zones.zone3.param"
         :paramRange = "zones.count3.param"
@@ -100,7 +100,7 @@
       />
       </div>
       <div class="column">
-      <Zone
+      <ZonePanel
         :cardCaption = "zones.zone4.caption"
         :paramColor = "zones.zone4.param"
         :paramRange = "zones.count4.param"
@@ -115,7 +115,7 @@
     <div class="columns is-desktop">
     <div class="column">
 
-    <Preset
+    <PresetPanel
       :cardCaption="'Preset 1'"
       :colors="presets.preset1"
       :presetNum="'preset1'"
@@ -125,7 +125,7 @@
     />
     </div>
     <div class="column">
-    <Preset
+    <PresetPanel
       :cardCaption="'Preset 2'"
       :colors="presets.preset2"
       :presetNum="'preset2'"
@@ -141,7 +141,7 @@
     <hr class="mx-4"/>
     <div class="content has-text-centered">
       <p class="has-text-white">
-        <a href="https://umolab.ru"><strong>Umolab Devices</strong></a> Controller. &copy; 2023
+        <a href="https://umolab.ru"><strong>Umolab Devices</strong></a> "Standalone" series controller  &copy; 2023
       </p>
     </div>
   </section>
@@ -157,20 +157,20 @@
 
 <script>
 import MyMqtt from './components/MyMqtt.vue';
-import Zone from './components/Zone.vue';
-import Color from './components/Color.vue';
-import Range from './components/Range.vue';
-import Preset from './components/Preset.vue';
+import ZonePanel from './components/ZonePanel.vue';
+// import ColorSelect from './components/ColorSelect.vue';
+// import RangeSelect from './components/RangeSelect.vue';
+import PresetPanel from './components/PresetPanel.vue';
 
 var deviceID = '/84:F3:EB:B7:3E:98/';
 
 export default {
   components: {
     MyMqtt,
-    Zone,
-    Color,
-    Range,
-    Preset,
+    ZonePanel,
+    // ColorSelect,
+    // RangeSelect,
+    PresetPanel,
   },
 
   data() {
