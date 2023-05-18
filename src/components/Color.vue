@@ -54,7 +54,7 @@ export default {
           const a = Number.parseInt(value)
           if (isNaN(a)) return value
               // return HEX color like #AABBCC
-              return '#' + a.toString(16).toUpperCase();
+              return '#' + a.toString(16).padStart(6, "0").toUpperCase();
       }
   }
 

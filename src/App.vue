@@ -449,7 +449,7 @@ export default {
     },
 
     onColorChange(value, param_fullname) {
-            console.log('on color change: ', value, param_fullname)
+            // console.log('on color change: ', value, param_fullname)
             if (value === null) return;
             let a = '';
             if (value[0] === '#') {
