@@ -75,7 +75,7 @@ input[type=color] {
   height: 36px;
   padding: 0.1rem 0.2rem;
   /* width: 100%; */
-  min-width: 250px;
+  /* min-width: 250px; */
 }
 
 .font-1_5rem {

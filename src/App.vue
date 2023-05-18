@@ -70,7 +70,7 @@
     </h1>
   </section>
 
-  <section class="container my-4">
+  <section class="container">
     <div class="columns is-desktop">
       <Zone
         :cardCaption = "zones.zone1.caption"
@@ -87,8 +87,8 @@
         @onColorChange="onColorChange"
         @onRangeChange="onRangeChange"
       />
-    </div>
-    <div class="columns is-desktop">
+    <!-- </div>
+    <div class="columns is-desktop"> -->
       <Zone
         :cardCaption = "zones.zone3.caption"
         :paramColor = "zones.zone3.param"
@@ -105,6 +105,22 @@
       />
     </div>
   </section>
+
+  <!-- <section class="container">
+    <div class="columns is-desktop">
+      <Zone
+        :cardCaption = "'Preset 1'"
+        @onColorChange="onColorChange"
+        @onRangeChange="onRangeChange"
+      />
+      <Zone
+        :cardCaption = "'Preset 2'"
+        @onColorChange="onColorChange"
+        @onRangeChange="onRangeChange"
+      />
+
+    </div>
+  </section> -->
 
   <section class="container">
     <footer>
@@ -326,8 +342,9 @@ export default {
 
 </script>
 
-<style >
-@import 'https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css';
+<style lang="scss">
+
+@import './sass/App.scss';
 
 body {
   background-color: black;
@@ -338,7 +355,8 @@ h1 {
   font-size: 24px;
   font-weight: 700;
   margin: 24px 20px;
-  color: whitesmoke;
+  // color: whitesmoke;
+  color: $white-bis;
 }
 
 .w-100 {
