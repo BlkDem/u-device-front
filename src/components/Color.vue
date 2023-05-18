@@ -1,5 +1,5 @@
 <template v-if="color">
-  <div class="w-100">
+  <div class="w-100 mx-2">
     <label :for="newID" class="font-1_5rem w-100 text-info text-center color-label">
       {{ getHexColor(paramColor.param_value) }}
     </label>
@@ -61,13 +61,15 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '../sass/App.scss';
+
 .color-label{
   position: relative;
   display: block;
   text-shadow: 1px 1px 1px #333;
   margin-top: 16px;
-  color: whitesmoke;
+  color: $primary;
   /* margin-bottom: -30px; */
 }
 

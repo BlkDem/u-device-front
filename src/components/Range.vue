@@ -1,12 +1,14 @@
 <template>
-  <div class="px-2 w-100">
+  <div class="mx-2 w-100">
     <div class="flex-space font-1_2rem">
       <div class="text-info w-25">{{ paramRange.min }}</div>
       <div class="has-text-info">{{ getValue(paramRange.param_value) }}</div>
       <div class="text-info w-25 align-right">{{ paramRange.max }}</div>
     </div>
-    <input type="range" class="form-range" step="1" :min="paramRange.min" :max="paramRange.max"
-      :value="getValue(paramRange.param_value)" @change="onChange($event.target.value)">
+    <div class="flex-space">
+      <input type="range" class="w-100" step="1" :min="paramRange.min" :max="paramRange.max"
+        :value="getValue(paramRange.param_value)" @change="onChange($event.target.value)">
+    </div>
   </div>
 </template>
 
@@ -52,9 +54,9 @@ export default {
 
 <style scoped lang="scss">
 
-.form-range {
-  width: 100%;
-}
+// .form-range {
+//   width: 100%;
+// }
 .flex-space {
     display: flex;
     align-items: center;

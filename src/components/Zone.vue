@@ -1,5 +1,5 @@
 <template>
-  <div class="column">
+
     <article class="panel is-dark">
       <p class="panel-heading">
         {{ cardCaption }}
@@ -18,7 +18,6 @@
       :paramRange="paramRange"
       @onChange="onRangeChange"
     />
-  </div>
 </template>
 
 <script>

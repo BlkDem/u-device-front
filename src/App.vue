@@ -70,8 +70,9 @@
     </h1>
   </section>
 
-  <section class="container">
+  <section class="container py-4">
     <div class="columns is-desktop">
+      <div class="column">
       <Zone
         :cardCaption = "zones.zone1.caption"
         :paramColor = "zones.zone1.param"
@@ -79,7 +80,8 @@
         @onColorChange="onColorChange"
         @onRangeChange="onRangeChange"
       />
-
+      </div>
+      <div class="column">
       <Zone
         :cardCaption = "zones.zone2.caption"
         :paramColor = "zones.zone2.param"
@@ -87,8 +89,8 @@
         @onColorChange="onColorChange"
         @onRangeChange="onRangeChange"
       />
-    <!-- </div>
-    <div class="columns is-desktop"> -->
+      </div>
+      <div class="column">
       <Zone
         :cardCaption = "zones.zone3.caption"
         :paramColor = "zones.zone3.param"
@@ -96,6 +98,8 @@
         @onColorChange="onColorChange"
         @onRangeChange="onRangeChange"
       />
+      </div>
+      <div class="column">
       <Zone
         :cardCaption = "zones.zone4.caption"
         :paramColor = "zones.zone4.param"
@@ -103,24 +107,29 @@
         @onColorChange="onColorChange"
         @onRangeChange="onRangeChange"
       />
+      </div>
     </div>
   </section>
 
-  <!-- <section class="container">
+  <section class="container">
     <div class="columns is-desktop">
-      <Zone
-        :cardCaption = "'Preset 1'"
-        @onColorChange="onColorChange"
-        @onRangeChange="onRangeChange"
-      />
-      <Zone
-        :cardCaption = "'Preset 2'"
-        @onColorChange="onColorChange"
-        @onRangeChange="onRangeChange"
-      />
+    <div class="column">
 
+    <Preset
+      :cardCaption="'Preset 1'"
+      :colors="presets.preset1"
+      @onColorChange="onColorChange"
+    />
     </div>
-  </section> -->
+    <div class="column">
+    <Preset
+      :cardCaption="'Preset 2'"
+      :colors="presets.preset2"
+      @onColorChange="onColorChange"
+    />
+    </div>
+    </div>
+  </section>
 
   <section class="container">
     <footer>
@@ -139,6 +148,7 @@ import MyMqtt from './components/MyMqtt.vue';
 import Zone from './components/Zone.vue';
 import Color from './components/Color.vue';
 import Range from './components/Range.vue';
+import Preset from './components/Preset.vue';
 
 const deviceID = '/84:F3:EB:B7:3E:98/';
 
@@ -148,10 +158,53 @@ export default {
     Zone,
     Color,
     Range,
+    Preset,
   },
 
   data() {
     return {
+
+      presets: {
+
+        preset1: {
+          color1: {
+            param_fullname: deviceID + 'preset1/zone1',
+            param_value: 0,
+          },
+          color2: {
+            param_fullname: deviceID + 'preset1/zone2',
+            param_value: 0,
+          },
+          color3: {
+            param_fullname: deviceID + 'preset1/zone3',
+            param_value: 0,
+          },
+          color4: {
+            param_fullname: deviceID + 'preset1/zone4',
+            param_value: 0,
+          },
+        },
+
+        preset2: {
+          color1: {
+            param_fullname: deviceID + 'preset2/zone1',
+            param_value: 0,
+          },
+          color2: {
+            param_fullname: deviceID + 'preset2/zone2',
+            param_value: 0,
+          },
+          color3: {
+            param_fullname: deviceID + 'preset2/zone3',
+            param_value: 0,
+          },
+          color4: {
+            param_fullname: deviceID + 'preset2/zone4',
+            param_value: 0,
+          },
+        }
+
+      },
 
       zones: {
 
