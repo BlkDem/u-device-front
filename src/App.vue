@@ -1,65 +1,47 @@
 <template>
-  <section class="container is-max-widescreen mt-4">
-    <header>
-      <nav class="navbar is-dark br-8" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-          <a class="navbar-item" href="https://umolab.ru">
-            <img src="https://iotman.blkdem.ru/apple-icon-60x60.png" height="60">
-          </a>
+  <div class="tabs is-centered ">
+  <ul>
+    <li>
+      <a class="navbar-item" href="https://umolab.ru">
+        <img src="https://iotman.blkdem.ru/apple-icon-60x60.png" height="32">
+      </a>
 
-          <a role="button" class="navbar-burger" aria-label="menu" data-target="navMenu" aria-expanded="false">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-          </a>
-        </div>
+    </li>
 
-        <div id="navMenu" class="navbar-menu">
-          <div class="navbar-start">
-            <a class="navbar-item">
-              Home
-            </a>
+    <li
+      :class="{'is-active': tabIndex === 0}"
+      @click="tabIndex=0"
+    >
+      <a>
+        <span>System</span>
+      </a>
+    </li>
+    <li
+      :class="{'is-active': tabIndex === 1}"
+      @click="tabIndex=1"
+    >
+      <a>
+        <span>Clock</span>
+      </a>
+    </li>
+    <li
+      :class="{'is-active': tabIndex === 2}"
+      @click="tabIndex=2"
+    >
+      <a>
+        <span>Colors</span>
+      </a>
+    </li>
+    <li
+      @click="tabIndex=0"
+    >
+      <a href="/config">
 
-            <a class="navbar-item">
-              Documentation
-            </a>
-
-            <!-- <div class="navbar-item has-dropdown is-hoverable">
-              <a class="navbar-link">
-                More
-              </a>
-
-              <div class="navbar-dropdown">
-                <a class="navbar-item">
-                  About
-                </a>
-                <a class="navbar-item">
-                  Jobs
-                </a>
-                <a class="navbar-item">
-                  Contact
-                </a>
-                <hr class="navbar-divider">
-                <a class="navbar-item">
-                  Report an issue
-                </a>
-              </div>
-            </div> -->
-          </div>
-
-          <div class="navbar-end">
-            <div class="navbar-item">
-              <div class="buttons">
-                <a class="button is-success" href="/config">
-                  Config
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
-  </section>
+        <span>Setup</span>
+      </a>
+    </li>
+  </ul>
+</div>
 
   <section class="container is-max-widescreen">
     <h1>
@@ -176,6 +158,8 @@ export default {
   data() {
     return {
 
+      tabIndex: 0,
+
       isConnected: false,
 
       deviceAddress: deviceID,
@@ -257,6 +241,13 @@ export default {
         ip: {
           param: {
             param_fullname: deviceID + 'ip',
+            param_value: '',
+          }
+        },
+
+        brightness: {
+          param: {
+            param_fullname: deviceID + 'brightness',
             param_value: '',
           }
         },
@@ -353,6 +344,7 @@ export default {
       'cmd',
       'systime',
       'uptime',
+      'brightness',
       'ip',
       'ssid',
       'zone1',
@@ -382,7 +374,26 @@ export default {
     this.collapseEventRegister();
   },
 
+  watch: {
+    deviceAddress() {
+      if (this.deviceID?.length < 2) return 'undefined';
+      return this.deviceID.substring(0, str.length - 1);
+    }
+  },
+
   methods: {
+
+    async setBrightness(value) {
+      let newValue;
+      newValue = (value < 0) ? 0 : value;
+      newValue = (value > 6) ? 6 : value;
+
+      const response = await fetch('/control?cmd=7db,' + newValue);
+      let json = await response.json();
+      console.log(json);
+
+      this.$refs.mqttRef.doPublish(deviceID + 'brightness', newValue.toString());
+    },
 
     async getConfigJson() {
 

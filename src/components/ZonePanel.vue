@@ -10,7 +10,7 @@
       <div class="panel-block">
         <ColorSelect
           :paramColor="paramColor"
-          @onChange="onChange"
+          @onColorChange="onColorChange"
         />
       </div>
     </article>
@@ -66,7 +66,7 @@ export default {
   },
 
   methods: {
-    onChange(e, value) {
+    onColorChange(e, value) {
       console.log('from zone', e, value)
       this.$emit('onColorChange', e, value)
     },

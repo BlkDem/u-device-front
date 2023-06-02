@@ -109,17 +109,18 @@ export default {
             const {
                 host,
                 port,
-                endpoint,
+                protocol,
                 ...options
             } = this.connection
 
 
-            const connectUrl = this.connection.protocol + '://' + this.connection.host + ':' + this.connection.port
+            const connectUrl = protocol + '://' + host + ':' + port
             // const connectUrl = 'wss://ice9.umolab.ru:9883';
                 // 'wss://ice9.umolab.ru:9883'
 
             try {
-                console.log(options)
+                // console.log(options)
+                /* global mqtt */
                 this.client = mqtt.connect(connectUrl, options)
             } catch (error) {
                 console.log('MQTT: connect error', error)
@@ -151,7 +152,7 @@ export default {
                 qos
             }, (error, res) => {
                 if (error) {
-                    console.log('MQTT: Subscribe to topics error', error)
+                    console.log('MQTT: Subscribe to topics error', error, res)
                     return
                 }
                 this.subscribeSuccess = true

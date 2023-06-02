@@ -4,7 +4,7 @@
       {{ getHexColor(paramColor.param_value) }}
     </label>
     <input type="color" :id="newID" class="w-100" :value="getHexColor(paramColor.param_value)"
-      @input="onChange($event.target.value)" />
+      @input="onColor($event.target.value)" />
   </div>
 </template>
 
@@ -14,7 +14,7 @@ import MakeID from '../components/helpers/makeid';
 
 export default {
 
-  emits: ['onChange'],
+  emits: ['onColorChange'],
 
   props: {
 
@@ -23,8 +23,6 @@ export default {
       },
 
   },
-
-  emits: ['onChange'],
 
   data() {
       return {
@@ -41,8 +39,8 @@ export default {
 
   methods: {
 
-      onChange(e) {
-          this.$emit('onChange', e, this.paramColor.param_fullname)
+      onColor(e) {
+          this.$emit('onColorChange', e, this.paramColor.param_fullname)
       },
 
       getStyle() {

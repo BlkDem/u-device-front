@@ -10,19 +10,19 @@
       <div class="panel-block">
         <ColorSelect
           :paramColor="colors.zone1"
-          @onChange="onColorChange"
+          @onColorChange="onColorChange"
         />
         <ColorSelect
           :paramColor="colors.zone2"
-          @onChange="onColorChange"
+          @onColorChange="onColorChange"
         />
         <ColorSelect
           :paramColor="colors.zone3"
-          @onChange="onColorChange"
+          @onColorChange="onColorChange"
         />
         <ColorSelect
           :paramColor="colors.zone4"
-          @onChange="onColorChange"
+          @onColorChange="onColorChange"
         />
       </div>
     </article>
