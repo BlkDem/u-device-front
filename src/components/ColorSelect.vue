@@ -1,6 +1,6 @@
 <template v-if="color">
-  <div class="w-100 mx-2">
-    <label :for="newID" class="font-1_5rem w-100 text-info text-center color-label">
+  <div class="w-100 mx-1">
+    <label :for="newID" class="font-1_5rem w-100 text-info text-center color-label has-text-centered">
       {{ getHexColor(paramColor.param_value) }}
     </label>
     <input type="color" :id="newID" class="w-100" :value="getHexColor(paramColor.param_value)"
@@ -68,12 +68,15 @@ export default {
   text-shadow: 1px 1px 1px #333;
   margin-top: 16px;
   color: $primary;
-  /* margin-bottom: -30px; */
+  margin-bottom: -30px;
 }
 
 input[type=color] {
   height: 36px;
-  padding: 0.1rem 0.2rem;
+  padding: 0 2px;
+  margin: 0;
+  border: 1px solid grey;
+  border-radius: 4px;
   /* width: 100%; */
   /* min-width: 250px; */
 }

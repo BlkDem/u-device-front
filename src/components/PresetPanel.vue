@@ -2,7 +2,7 @@
 
     <article class="panel is-dark py-4">
       <p class="panel-heading">
-        {{ cardCaption }}
+        <span class="color-system">{{ cardCaption }}</span>
       </p>
       <p class="panel-tabs">
         {{ cardTabs }}

@@ -1,18 +1,19 @@
 <template>
-  <div class="tabs is-centered ">
+  <div class="tabs is-centered">
   <ul>
-    <li>
+    <!-- <li>
       <a class="navbar-item" href="https://umolab.ru">
         <img src="https://iotman.blkdem.ru/apple-icon-60x60.png" height="32">
       </a>
 
-    </li>
+    </li> -->
 
     <li
       :class="{'is-active': tabIndex === 0}"
       @click="tabIndex=0"
     >
       <a>
+        <i class="fa-solid fa-microchip mx-2"></i>
         <span>System</span>
       </a>
     </li>
@@ -21,6 +22,7 @@
       @click="tabIndex=1"
     >
       <a>
+        <i class="fa-solid fa-clock mx-2"></i>
         <span>Clock</span>
       </a>
     </li>
@@ -29,6 +31,7 @@
       @click="tabIndex=2"
     >
       <a>
+        <i class="fa-solid fa-palette mx-2"></i>
         <span>Colors</span>
       </a>
     </li>
@@ -36,7 +39,7 @@
       @click="tabIndex=0"
     >
       <a href="/config">
-
+        <i class="fa-solid fa-gear mx-2"></i>
         <span>Setup</span>
       </a>
     </li>
@@ -44,11 +47,13 @@
 </div>
 
   <section class="container is-max-widescreen">
-    <h1>
+    <h1 class="has-text-centered">
       <button class="button is-rounded w-40px mr-2"
         :class="{'is-loading is-danger': !isConnected, 'is-success': isConnected}"
-      ></button>
-      UDC - Standalone #1 - {{ deviceAddress }}
+      >
+        <i class="fa-solid fa-cloud"></i>
+      </button>
+      UDC - Standalone #1 - <span class="has-text-info  ">{{ deviceAddress }}</span>
     </h1>
   </section>
 
@@ -162,7 +167,7 @@ export default {
 
       isConnected: false,
 
-      deviceAddress: deviceID,
+      // deviceAddress: deviceID,
 
       topics: '',
 
@@ -374,10 +379,10 @@ export default {
     this.collapseEventRegister();
   },
 
-  watch: {
+  computed: {
     deviceAddress() {
-      if (this.deviceID?.length < 2) return 'undefined';
-      return this.deviceID.substring(0, str.length - 1);
+      if (deviceID.length < 2) return 'undefined';
+      return deviceID.substring(1, deviceID.length - 1);
     }
   },
 
@@ -385,8 +390,7 @@ export default {
 
     async setBrightness(value) {
       let newValue;
-      newValue = (value < 0) ? 0 : value;
-      newValue = (value > 6) ? 6 : value;
+      newValue = (value < 0) ? 0 : (value > 6) ? 6 : value;
 
       const response = await fetch('/control?cmd=7db,' + newValue);
       let json = await response.json();
@@ -514,6 +518,7 @@ export default {
 
 body, html {
   background-color: black;
+  color: antiquewhite;
   // padding: 16px 16px;
 }
 
@@ -521,8 +526,8 @@ h1 {
   font-size: 24px;
   font-weight: 700;
   margin: 24px 20px;
-  // color: whitesmoke;
-  color: $white-bis;
+  color: antiquewhite;
+  // color: $white-bis;
 }
 
 .w-40px {
@@ -549,6 +554,18 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: space-around;
+}
+
+.tabs a {
+  color: antiquewhite;
+}
+
+.color-system {
+  color: antiquewhite;
+}
+
+.panel-heading {
+  line-height: 0.5;
 }
 
 

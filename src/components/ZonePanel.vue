@@ -2,9 +2,9 @@
 
     <article class="panel is-dark">
       <p class="panel-heading">
-        {{ cardCaption }}
+        <span class="color-system">{{ cardCaption }}</span>
       </p>
-      <p class="panel-tabs">
+      <p class="panel-tabs p-1">
         {{ cardTabs }}
       </p>
       <div class="panel-block">
