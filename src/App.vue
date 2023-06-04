@@ -1,50 +1,9 @@
 <template>
-  <div class="tabs is-centered">
-  <ul>
-    <!-- <li>
-      <a class="navbar-item" href="https://umolab.ru">
-        <img src="https://iotman.blkdem.ru/apple-icon-60x60.png" height="32">
-      </a>
 
-    </li> -->
-
-    <li
-      :class="{'is-active': tabIndex === 0}"
-      @click="tabIndex=0"
-    >
-      <a>
-        <i class="fa-solid fa-microchip mx-2"></i>
-        <span>System</span>
-      </a>
-    </li>
-    <li
-      :class="{'is-active': tabIndex === 1}"
-      @click="tabIndex=1"
-    >
-      <a>
-        <i class="fa-solid fa-clock mx-2"></i>
-        <span>Clock</span>
-      </a>
-    </li>
-    <li
-      :class="{'is-active': tabIndex === 2}"
-      @click="tabIndex=2"
-    >
-      <a>
-        <i class="fa-solid fa-palette mx-2"></i>
-        <span>Colors</span>
-      </a>
-    </li>
-    <li
-      @click="tabIndex=0"
-    >
-      <a href="/config">
-        <i class="fa-solid fa-gear mx-2"></i>
-        <span>Setup</span>
-      </a>
-    </li>
-  </ul>
-</div>
+  <TopTabs
+    @onPageChange="onPageChange"
+  >
+  </TopTabs>
 
   <section class="container is-max-widescreen">
     <h1 class="has-text-centered">
@@ -53,7 +12,7 @@
       >
         <i class="fa-solid fa-cloud"></i>
       </button>
-      UDC - Standalone #1 - <span class="has-text-info  ">{{ deviceAddress }}</span>
+      UDC Standalone #1 - <span class="has-text-info  ">{{ deviceAddress }}</span>
     </h1>
   </section>
 
@@ -124,14 +83,7 @@
     </div>
   </section>
 
-  <section class="container is-max-widescreen my-4">
-    <hr class="mx-4"/>
-    <div class="content has-text-centered">
-      <p class="has-text-white">
-        <a href="https://umolab.ru"><strong>Umolab Devices</strong></a> "Standalone" series controller  &copy; 2023
-      </p>
-    </div>
-  </section>
+  <PageFooter />
 
   <MyMqtt ref="mqttRef"
     :deviceID="deviceID"
@@ -148,6 +100,8 @@ import ZonePanel from './components/ZonePanel.vue';
 // import ColorSelect from './components/ColorSelect.vue';
 // import RangeSelect from './components/RangeSelect.vue';
 import PresetPanel from './components/PresetPanel.vue';
+import TopTabs from './components/TopTabs.vue';
+import PageFooter from './components/PageFooter.vue';
 
 var deviceID = '/84:F3:EB:B7:3E:98/';
 
@@ -158,12 +112,14 @@ export default {
     // ColorSelect,
     // RangeSelect,
     PresetPanel,
+    TopTabs,
+    PageFooter,
   },
 
   data() {
     return {
 
-      tabIndex: 0,
+      // tabIndex: 0,
 
       isConnected: false,
 
@@ -388,6 +344,10 @@ export default {
 
   methods: {
 
+    onPageChange(page) {
+      console.log(page);
+    },
+
     async setBrightness(value) {
       let newValue;
       newValue = (value < 0) ? 0 : (value > 6) ? 6 : value;
@@ -515,60 +475,5 @@ export default {
 <style lang="scss">
 
 @import './sass/App.scss';
-
-body, html {
-  background-color: black;
-  color: antiquewhite;
-  // padding: 16px 16px;
-}
-
-h1 {
-  font-size: 24px;
-  font-weight: 700;
-  margin: 24px 20px;
-  color: antiquewhite;
-  // color: $white-bis;
-}
-
-.w-40px {
-  width: 40px;
-}
-
-.w-40 {
-  width: 40%;
-}
-
-.w-50 {
-  width: 50%;
-}
-
-.w-100 {
-  width: 100%;
-}
-
-.br-8 {
-  border-radius: 8px;
-}
-
-.flex-space {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.tabs a {
-  color: antiquewhite;
-}
-
-.color-system {
-  color: antiquewhite;
-}
-
-.panel-heading {
-  line-height: 0.5;
-}
-
-
-
 
 </style>

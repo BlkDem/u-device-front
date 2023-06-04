@@ -1,3 +1,69 @@
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css';
 @import 'https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css';
 @import '../node_modules/bulma/sass/utilities/_all.sass';
+
+body, html {
+  background-color: black;
+  color: antiquewhite;
+  // padding: 16px 16px;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 24px 20px;
+  color: antiquewhite;
+  // color: $white-bis;
+}
+
+.w-40px {
+  width: 40px;
+}
+
+.w-40 {
+  width: 40%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.br-8 {
+  border-radius: 8px;
+}
+
+.flex-space {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.tabs a {
+  color: antiquewhite;
+  padding: 0.5em 0.5em;
+}
+
+.tabs a:hover {
+  color: cornflowerblue;
+}
+
+a:hover {
+  color: cornflowerblue;
+}
+
+.color-system {
+  color: antiquewhite;
+}
+
+.panel-heading {
+  line-height: 0.5;
+}
+
+hr {
+  height: 1px;
+  margin-top: 4rem!important;
+}
