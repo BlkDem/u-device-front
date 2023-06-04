@@ -5,18 +5,13 @@
   >
   </TopTabs>
 
-  <section class="container is-max-widescreen">
-    <h1 class="has-text-centered">
-      <button class="button is-rounded w-40px mr-2"
-        :class="{'is-loading is-danger': !isConnected, 'is-success': isConnected}"
-      >
-        <i class="fa-solid fa-cloud"></i>
-      </button>
-      UDC Standalone #1 - <span class="has-text-info  ">{{ deviceAddress }}</span>
-    </h1>
-  </section>
+  <PageTop
+    :isConnected="isConnected"
+    :deviceAddress="deviceAddress"
+  >
+  </PageTop>
 
-  <section class="container py-4 is-max-widescreen">
+  <section name="zones" class="container py-4 is-max-widescreen">
     <div class="columns is-desktop">
       <div class="column">
       <ZonePanel
@@ -57,7 +52,7 @@
     </div>
   </section>
 
-  <section class="container is-max-widescreen">
+  <section name="presets" class="container is-max-widescreen">
     <div class="columns is-desktop">
     <div class="column">
 
@@ -87,7 +82,7 @@
 
   <MyMqtt ref="mqttRef"
     :deviceID="deviceID"
-    :topic-subscribe="topics"
+    :topicSubscribe="topics"
     @on-connect="mqttConnected"
     @on-message="onMessage"
   />
@@ -97,11 +92,10 @@
 <script>
 import MyMqtt from './components/MyMqtt.vue';
 import ZonePanel from './components/ZonePanel.vue';
-// import ColorSelect from './components/ColorSelect.vue';
-// import RangeSelect from './components/RangeSelect.vue';
 import PresetPanel from './components/PresetPanel.vue';
 import TopTabs from './components/TopTabs.vue';
 import PageFooter from './components/PageFooter.vue';
+import PageTop from './components/PageTop.vue';
 
 var deviceID = '/84:F3:EB:B7:3E:98/';
 
@@ -109,17 +103,16 @@ export default {
   components: {
     MyMqtt,
     ZonePanel,
-    // ColorSelect,
-    // RangeSelect,
     PresetPanel,
     TopTabs,
     PageFooter,
+    PageTop,
   },
 
   data() {
     return {
 
-      // tabIndex: 0,
+      currentPage: 0,
 
       isConnected: false,
 
@@ -346,26 +339,36 @@ export default {
 
     onPageChange(page) {
       console.log(page);
+      this.currentPage = page;
     },
 
     async setBrightness(value) {
       let newValue;
       newValue = (value < 0) ? 0 : (value > 6) ? 6 : value;
 
-      const response = await fetch('/control?cmd=7db,' + newValue);
-      let json = await response.json();
-      console.log(json);
+      try {
+        const response = await fetch('/control?cmd=7db,' + newValue);
+        const json = await response.json();
+        console.log(json);
+      }
+      catch (e) {
+        console.error('Error set brightness', e);
+      }
 
       this.$refs.mqttRef.doPublish(deviceID + 'brightness', newValue.toString());
     },
 
     async getConfigJson() {
 
-      let response = await fetch('/json');
+      try {
+        const response = await fetch('/json');
 
-      let json = await response.json();
-      deviceID = (json['WiFi']['STA MAC'])?'/' + json['WiFi']['STA MAC'] + '/':'/84:F3:EB:B7:3E:98/'
-      console.log('mac: ', json['WiFi']['STA MAC'], json)
+        const json = await response.json();
+        deviceID = (json['WiFi']['STA MAC'])?'/' + json['WiFi']['STA MAC'] + '/':'/84:F3:EB:B7:3E:98/'
+        console.log('mac: ', json['WiFi']['STA MAC'], json)
+      } catch (e) {
+        console.error('Error read config', e);
+      }
 },
 
 

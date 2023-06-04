@@ -62,13 +62,11 @@ export default {
     },
 
     created() {
-
         this.connection.clientId = MakeID.makeId(8, 'mqtt_umolab_')
-
     },
 
     mounted() {
-        console.log(Array.from(this.topicSubscribe));
+        // console.log(Array.from(this.topicSubscribe));
 
         this.createConnection();
     },
@@ -116,7 +114,6 @@ export default {
 
             const connectUrl = protocol + '://' + host + ':' + port
             // const connectUrl = 'wss://ice9.umolab.ru:9883';
-                // 'wss://ice9.umolab.ru:9883'
 
             try {
                 // console.log(options)
