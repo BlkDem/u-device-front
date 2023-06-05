@@ -39,7 +39,7 @@ h1 {
 .flex-space {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
 .tabs a {
@@ -48,11 +48,15 @@ h1 {
 }
 
 .tabs a:hover {
-  color: cornflowerblue;
+  color:  #3e8ed0;
 }
 
 a:hover {
-  color: cornflowerblue;
+  color:  #3e8ed0;
+}
+
+.tabs li.is-active a {
+  color:  #3e8ed0;
 }
 
 .color-system {
@@ -66,4 +70,22 @@ a:hover {
 hr {
   height: 1px;
   margin-top: 4rem!important;
+}
+
+.top-fix {
+  position: fixed;
+  width: 100vw;
+  margin-top: -4rem;
+  z-index: 1;
+}
+
+.space-4rem {
+  margin-top: 4rem;
+}
+
+.window-borders {
+  border-top: 4px solid grey;
+  border-bottom: 4px solid grey;
+  border-radius: 8px;
+  // margin: 0;
 }

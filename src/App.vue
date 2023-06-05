@@ -11,8 +11,8 @@
   >
   </PageTop>
 
-  <section name="zones" class="container py-4 is-max-widescreen">
-    <div class="columns is-desktop">
+  <section name="zones" class="container py-4 is-max-widescreen window-borders my-4">
+    <div class="columns is-desktop has-background-dark mx-0">
       <div class="column">
       <ZonePanel
         :cardCaption = "zones.zone1.caption"
@@ -52,8 +52,8 @@
     </div>
   </section>
 
-  <section name="presets" class="container is-max-widescreen">
-    <div class="columns is-desktop">
+  <section name="presets" class="container py-4 is-max-widescreen window-borders">
+    <div class="columns is-desktop has-background-dark mx-0">
     <div class="column">
 
     <PresetPanel

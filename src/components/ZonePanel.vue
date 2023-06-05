@@ -1,7 +1,7 @@
 <template>
 
     <article class="panel is-dark">
-      <p class="panel-heading">
+      <p class="panel-heading has-background-info-dark">
         <span class="color-system">{{ cardCaption }}</span>
       </p>
       <p class="panel-tabs p-1">

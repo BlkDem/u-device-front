@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs is-centered mx-4">
+  <div class="tabs is-centered top-fix has-background-dark">
   <ul>
     <!-- <li>
       <a class="navbar-item" href="https://umolab.ru">
