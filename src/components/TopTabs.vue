@@ -1,5 +1,5 @@
 <template>
-  <div class="tabs is-centered top-fix has-background-dark">
+  <div class="tabs is-centered top-fix has-background-black">
   <ul>
     <!-- <li>
       <a class="navbar-item" href="https://umolab.ru">
@@ -67,7 +67,6 @@ export default {
 
   created() {
     // const {PAGE_SYSTEM, PAGE_CLOCK, PAGE_LED, PAGE_CONFIG} = pages
-    // console.log(PAGE_SYSTEM);
   },
 
   watch: {

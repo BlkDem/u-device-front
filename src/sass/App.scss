@@ -57,6 +57,7 @@ a:hover {
 
 .tabs li.is-active a {
   color:  #3e8ed0;
+  border-bottom: 4px solid #3e8ed0;
 }
 
 .color-system {
@@ -77,6 +78,11 @@ hr {
   width: 100vw;
   margin-top: -4rem;
   z-index: 1;
+  border: 0;
+}
+
+.tabs ul {
+  border: 0;
 }
 
 .space-4rem {
@@ -88,4 +94,12 @@ hr {
   border-bottom: 4px solid grey;
   border-radius: 8px;
   // margin: 0;
+}
+
+a {
+  transition: all 0.5s;
+  // color: white;
+}
+a:hover {
+  // color: blue;
 }
